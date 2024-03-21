@@ -23,16 +23,17 @@ To set up the Access Control policy for Split Experimentation Workspace (aka ass
 The application must be in the same Microsoft Entra Tenant, in which the Split 	Experimentation Workspace is provisioned or considered to be provisioned. Only basic registration is needed at this point. Read more on this topic.
 
 ![Register](./Images/entra-1.png)
-
+<br/>
 ### Enable Entra application to be used as audience
 
 Configure Application ID URI. This setting is mandatory to allow the Entra application to be used as global audience/scope when requesting an authentication token.
 
 ![Enable](./Images/entra-2.png)
- 
+ <br/>
 Ensure the value is: **api://{Entra application ID}** where {Entra application ID} must be the same Microsoft Entra application ID. 
 
 ![EnsureID](./Images/entra-3.png)
+<br/>
 
 ### Allow users to request access to Split Experimentation from Azure Portal
 
@@ -41,7 +42,7 @@ Azure Portal UI is effectively the UX for Split Experimentation Workspace. It in
 **Add scope**
 
 ![Scope](./Images/entra-4.png)
- 
+ <br/>
 **Authorize Portal Access**
 
 Ensure the following client application IDs are added.
@@ -50,7 +51,7 @@ Split Experimentation Portal: 73b67c52-525b-4470-9c5c-1e02c60b8a05
 Azure App Configuration Portal: 1e2401ea-428f-4575-9bbf-b301f7e1eb67
 
 ![Authorize Portal](./Images/entra-5.png)
- 
+<br/>
 **Authorization roles**
 
 Split Experimentation workspace supports well-known roles to scope access control. Add these roles in the Entra application first. 
@@ -59,15 +60,15 @@ The following values for roles are supported:
 **ExperimentationDataReader**  - read-only access to Experimentation Workspace
 
 ![Authorize](./Images/entra-6.png)
- 
+ <br/>
 ### Configure user and role assignments
 
 **Visit the associated Microsoft Entra Enterprise Application**
 
 ![Entra](./Images/entra-7.png)
- 
+ <br/>
 **Assignment requirements options**
-
+<br/>
 ![Requirements](./Images/entra-8.png)
 
 **Yes** – only the entries, explicitly defined under “Users and Groups” in the Enterprise Application can obtain token and therefore access the associated Split Experimentation Workspace (recommended).
@@ -79,3 +80,4 @@ The following values for roles are supported:
 This associates existing security principals with Split Experimentation role(s), previously defined in 	the Entra application app roles section.
 
 ![Assign](./Images/entra-9.png)
+<br/>
