@@ -4,23 +4,23 @@ Split Experimentation for Azure App Configuration is a feature that allows devel
 
 ## Overview
 
-•	Concept
-•	Prerequisites – Azure Subscription, Azure App Configuration store
-•	Step 1: Add Application Insights resource to App Configuration store
-•	Step 2: Create a Split Experimentation Workspace resource 
-•	Step 3: Create a Variant Feature Flag and enable Telemetry
-•	Step 4: Create an application (Quickstart), make changes to application code 
-•	Step 5: Setup an Experiment on App Configuration Portal 
-•	Step 6: Getting Experiment results
-•	Additional Read: Access Control, ARM Template ; QuickStart: Sample App ; Troubleshooting
+•	Concept <br />
+•	Prerequisites – Azure Subscription, Azure App Configuration store <br/><br/>
+•	Step 1: Add Application Insights resource to App Configuration store <br/><br/>
+•	Step 2: Create a Split Experimentation Workspace resource <br/><br/>
+•	Step 3: Create a Variant Feature Flag and enable Telemetry <br/><br/>
+•	Step 4: Create an application (Quickstart), make changes to application code <br/><br/>
+•	Step 5: Setup an Experiment on App Configuration Portal <br/><br/>
+•	Step 6: Getting Experiment results <br/><br/>
+•	Additional Read: Access Control, ARM Template ; QuickStart: Sample App ; Troubleshooting <br/><br/>
 
 ## Concept
 
 ### What is Experimentation?
 Microsoft has partnered with Split Software to deliver experimentation as a feature in Azure App Configuration. If this is your first time running an experiment, here are some terms to familiarize yourself with beforehand in the context of Feature Flags in App Configuration:
-**Feature Flags:** Allow teams to **toggle features on or off** dynamically during runtime. The feature flag also has an associated code block. The feature flag's state triggers whether the code block runs. Read more about Feature Flags on Azure App Configuration. 
-**Variant Feature Flags:** Represent different versions or configurations of a feature. In an experiment, the variant feature flags are compared in relevance to the metrics you are interested in and the traffic you have allocated for the application audience. Read more about Variant Feature Flags on Azure App Configuration.
-**A/B Testing:** A/B testing, also known as split testing, is an industry-standard method for evaluating the impact of potential changes within a technology stack. Read more about A/B Testing on Products.
+**Feature Flags:** Allow teams to **toggle features on or off** dynamically during runtime. The feature flag also has an associated code block. The feature flag's state triggers whether the code block runs. Read more about [Feature Flags on Azure App Configuration](https://learn.microsoft.com/en-us/azure/azure-app-configuration/concept-feature-management#basic-concepts). 
+**Variant Feature Flags:** Represent different versions or configurations of a feature. In an experiment, the variant feature flags are compared in relevance to the metrics you are interested in and the traffic you have allocated for the application audience. Read more about [Variant Feature Flags on Azure App Configuration](https://github.com/microsoft/FeatureManagement-Dotnet/tree/release/v4?tab=readme-ov-file#variants).
+**A/B Testing:** A/B testing, also known as split testing, is an industry-standard method for evaluating the impact of potential changes within a technology stack. Read more about [A/B Testing on Products](https://www.microsoft.com/en-us/research/group/experimentation-platform-exp/articles/a-b-testing-across-products/).
 
 Consider the following example: you want to see if customers of your e-commerce website are more likely to click the checkout button on their shopping cart if it is yellow in color (variant A) or when the same checkout button is orange in color (variant B). To setup this comparison, you are likely to divide traffic by half to each variant of the feature flag and use number of clicks as a metric to measure which one is performing better (where better is defined by an increase in number of clicks on the checkout button). It is unlikely that all your features will be as simple to measure and immediately evaluate, and that is where experimentation comes in. Running an experiment involves setting up a timeline for this process of comparing the performance of each variant relevant to the metrics you are interested in. The terms ‘A/B testing’ and ‘experimentation’ are often used interchangeably, where experimentation is essentially an extended A/B test where you are systematically testing hypotheses. 
 
@@ -65,8 +65,9 @@ To help introduce experimentation into your existing Azure resources, this new f
 You use a Microsoft Entra Enterprise Application to manage the users and groups who can access the results of your experiment(s). If your group already uses an Enterprise Application, you may contact the administrator of your group to add you to the users of it. Otherwise, you can follow the instructions to create an Enterprise Application now or follow the instructions that will prompt you to create an Enterprise Application later. 
 
 ## Prerequisites 
-•	An Azure subscription. If you don’t have one, create one for free.
-•	An App Configuration store. If you don’t have one, create an App Configuration store.
+•	An Azure subscription. If you don’t have one, [create one for free](https://azure.microsoft.com/en-us/free/).
+. <br/><br/>
+•	An App Configuration store. If you don’t have one, [create an App Configuration store](https://learn.microsoft.com/en-us/azure/azure-app-configuration/use-feature-flags-dotnet-core). <br/><br/>
 
 ## Steps
 
