@@ -5,14 +5,14 @@ Split Experimentation for Azure App Configuration is a feature that allows devel
 ## Overview
 
 •	Concept <br />
-•	Prerequisites – Azure Subscription, Azure App Configuration store <br/><br/>
-•	Step 1: Add Application Insights resource to App Configuration store <br/><br/>
-•	Step 2: Create a Split Experimentation Workspace resource <br/><br/>
-•	Step 3: Create a Variant Feature Flag and enable Telemetry <br/><br/>
-•	Step 4: Create an application (Quickstart), make changes to application code <br/><br/>
-•	Step 5: Setup an Experiment on App Configuration Portal <br/><br/>
-•	Step 6: Getting Experiment results <br/><br/>
-•	Additional Read: Access Control, ARM Template ; QuickStart: Sample App ; Troubleshooting <br/><br/>
+•	Prerequisites – Azure Subscription, Azure App Configuration store <br />
+•	Step 1: Add Application Insights resource to App Configuration store <br />
+•	Step 2: Create a Split Experimentation Workspace resource <br />
+•	Step 3: Create a Variant Feature Flag and enable Telemetry <br />
+•	Step 4: Create an application (Quickstart), make changes to application code <br />
+•	Step 5: Setup an Experiment on App Configuration Portal <br />
+•	Step 6: Getting Experiment results <br />
+•	Additional Read: Access Control, ARM Template ; QuickStart: Sample App ; Troubleshooting <br />
 
 ## Concept
 
@@ -65,9 +65,8 @@ To help introduce experimentation into your existing Azure resources, this new f
 You use a Microsoft Entra Enterprise Application to manage the users and groups who can access the results of your experiment(s). If your group already uses an Enterprise Application, you may contact the administrator of your group to add you to the users of it. Otherwise, you can follow the instructions to create an Enterprise Application now or follow the instructions that will prompt you to create an Enterprise Application later. 
 
 ## Prerequisites 
-•	An Azure subscription. If you don’t have one, [create one for free](https://azure.microsoft.com/en-us/free/).
-. <br/><br/>
-•	An App Configuration store. If you don’t have one, [create an App Configuration store](https://learn.microsoft.com/en-us/azure/azure-app-configuration/use-feature-flags-dotnet-core). <br/><br/>
+•	An Azure subscription. If you don’t have one, [create one for free](https://azure.microsoft.com/en-us/free/).<br />
+•	An App Configuration store. If you don’t have one, [create an App Configuration store](https://learn.microsoft.com/en-us/azure/azure-app-configuration/use-feature-flags-dotnet-core).<br />
 
 ## Steps
 
@@ -195,24 +194,20 @@ While the Quickstart uses Count as the measure, your application may have events
 **Desired Impact:** This allows results to be shown in context of positive and negative outcomes as it represents the ultimate goal or purpose behind measuring your created metric.
 
 Once you have created your metric, navigate to the Data Source blade and enable the **Data Ingestion checkbox** if it isn’t already enabled. Note: If you have not enabled **Data Ingestion** for your Split Experimentation Workspace resource already, feature evaluation and customer events will not be exported from your **Data Source** to Split.
- 
-![Data Source](./Images/16.png)
 
 Once the metrics have been created, return to the App Configuration portal and under **Experimentation > Split Experimentation Workspace**, confirm that your App Configuration store is connected to your Split Experimentation Workspace properly. If not, you can click Edit to update it.
 
-![AppConfig Connected](./Images/17.png)
+![AppConfig Connected](./Images/18.png)
 
 Once your App Configuration is connected to the Split Experimentation Workspace, go to Feature Manager and under “edit”, you can now create Experimentation on your previously created Variant Feature Flag.
 
-![Create Experiment](./Images/18.png)
+![Create Experiment](./Images/19.png)
  
 You will now be able to Create Experiment under the Experiment tab by checking the box and will be prompted to add a name and description for your experiment on this variant feature flag. 
 
-![Create Experiment Checkbox](./Images/19.png)
+![Create Experiment Checkbox](./Images/20.png)
  
 Click Review + update to activate the experiment. On **Feature Manager** in the App Configuration portal, your variant feature flag should now say **“Active”** under the experiment label.
-
-![Create Experiment Active](./Images/20.png)
  
 ## Step 6: Get Experiment Results
 Now that you have experimentation enabled on the variant feature flag, your live application is ready to send data to be processed to generate impressions and results. To put your newly setup experiment to the test and generate results for you to analyze, simulate some traffic to your application and wait a few minutes.
@@ -228,7 +223,7 @@ Once your application has generated enough traffic and event data (in this examp
 ### Experiment Versions
 If you navigate back to your **Feature Manager > Variant Feature Flag > edit** and make changes to: **Experiment title, Allocation,** or **Variant name/values**, then a new version of your experiment will be created for you to select to view the results of.
 
-![Versioning](./Images/222.png)
+![Versioning](./Images/22.png)
  
 ## Additional: 
 Access Control
