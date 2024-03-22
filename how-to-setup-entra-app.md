@@ -1,6 +1,6 @@
 # How to set up Data Plane Access Control for Split Experimentation Workspace on Azure App Config - authentication and authorization
 
-Azure Split-Experimentation uses Microsoft Entra to authorize requests for Split Experimentation instances (Experimentation Workspaces). Microsoft Entra also enables the use of custom roles to grant permissions to security principals.
+Experimentation in Azure App Configuration uses Microsoft Entra to authorize requests for Split Experimentation Workspace resources. Microsoft Entra also enables the use of custom roles to grant permissions to security principals.
 
 ## Overview
 
@@ -20,13 +20,15 @@ To set up the Access Control policy for Split Experimentation Workspace (aka ass
 
 ### Register new or use existing Microsoft Entra Application Registration
 
-The application must be in the same Microsoft Entra Tenant, in which the Split 	Experimentation Workspace is provisioned or considered to be provisioned. Only basic registration is needed at this point. Read more on this topic.
+The application must be in the same Microsoft Entra Tenant, in which the Split Experimentation Workspace is provisioned or considered to be provisioned. Only basic registration is needed at this point. [Read more on this topic](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app).
 
 ![Register](./Images/entra-1.png)
 <br/>
 ### Enable Entra application to be used as audience
 
-Configure Application ID URI. This setting is mandatory to allow the Entra application to be used as global audience/scope when requesting an authentication token.
+Configure Application ID URI. 
+
+This setting is mandatory to allow the Entra application to be used as global audience/scope when requesting an authentication token.
 
 ![Enable](./Images/entra-2.png)
  <br/>
@@ -43,21 +45,23 @@ Azure Portal UI is effectively the UX for Split Experimentation Workspace. It in
 
 ![Scope](./Images/entra-4.png)
  <br/>
+
 **Authorize Portal Access**
 
-Ensure the following client application IDs are added.
-Split Experimentation Resource Provider: d3e90440-4ec9-4e8b-878b-c89e889e9fbc
-Split Experimentation Portal: 73b67c52-525b-4470-9c5c-1e02c60b8a05
-Azure App Configuration Portal: 1e2401ea-428f-4575-9bbf-b301f7e1eb67
+Ensure the following client application IDs are added:
+<br/>Split Experimentation Resource Provider: d3e90440-4ec9-4e8b-878b-c89e889e9fbc
+<br/>Split Experimentation Portal: 73b67c52-525b-4470-9c5c-1e02c60b8a05
+<br/>Azure App Configuration Portal: 1e2401ea-428f-4575-9bbf-b301f7e1eb67
 
 ![Authorize Portal](./Images/entra-5.png)
 <br/>
+
 **Authorization roles**
 
 Split Experimentation workspace supports well-known roles to scope access control. Add these roles in the Entra application first. 
-The following values for roles are supported:
+The following values for roles are supported:<br/>
 **ExperimentationDataOwner**  - read-write access to Experimentation Workspace
-**ExperimentationDataReader**  - read-only access to Experimentation Workspace
+<br/>**ExperimentationDataReader**  - read-only access to Experimentation Workspace
 
 ![Authorize](./Images/entra-6.png)
  <br/>
@@ -67,8 +71,10 @@ The following values for roles are supported:
 
 ![Entra](./Images/entra-7.png)
  <br/>
+ 
 **Assignment requirements options**
 <br/>
+
 ![Requirements](./Images/entra-8.png)
 
 **Yes** – only the entries, explicitly defined under “Users and Groups” in the Enterprise Application can obtain token and therefore access the associated Split Experimentation Workspace (recommended).
