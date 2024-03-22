@@ -37,7 +37,7 @@ First step is to create and configure the Entra ID's Enterprise App setup. This 
 	```
 - Check for the created application registration in **Entra Id -> App Registrations** on Azure portal. Go to **Manifest** blade, update the 'isEnabled' on line 35 to false, save the manifest. Copy the following values from the manifest,  `id` at line2, `appId` at line 7 and `name` at line 26, keep these values for use in next steps.
 
-	:::image type="content" source="./Images/ManifestMenu.jpg" alt-text="On App registration, manifest is highlighted.":::
+	![Manifest](./Images/ManifestMenu.png)
 
 - Replace the entire manifest with the content copied from manifest.json in the repo. Edit the manifest with the values copied in previous step. Following edits are to be made :
     1. "id" on line 2
@@ -48,32 +48,32 @@ First step is to create and configure the Entra ID's Enterprise App setup. This 
 
 - Copy the following snippet on line 81, in the `preAuthorizedApplications`, and click save. You should get a manifest updated message.
 	```json
-	    	{
-			"appId": "d3e90440-4ec9-4e8b-878b-c89e889e9fbc",
-			"permissionIds": [
-				"b77a34fd-bafc-45e0-8907-a6098d55c56d"
-			]
-		},
-		{
-			"appId": "1e2401ea-428f-4575-9bbf-b301f7e1eb67",
-			"permissionIds": [
-				"b77a34fd-bafc-45e0-8907-a6098d55c56d"
-			]
-		},
-		{
-			"appId": "73b67c52-525b-4470-9c5c-1e02c60b8a05",
-			"permissionIds": [
-				"b77a34fd-bafc-45e0-8907-a6098d55c56d"
-			]
-		}
+	{
+		"appId": "d3e90440-4ec9-4e8b-878b-c89e889e9fbc",
+		"permissionIds": [
+			"b77a34fd-bafc-45e0-8907-a6098d55c56d"
+		]
+	},
+	{
+		"appId": "1e2401ea-428f-4575-9bbf-b301f7e1eb67",
+		"permissionIds": [
+			"b77a34fd-bafc-45e0-8907-a6098d55c56d"
+		]
+	},
+	{
+		"appId": "73b67c52-525b-4470-9c5c-1e02c60b8a05",
+		"permissionIds": [
+			"b77a34fd-bafc-45e0-8907-a6098d55c56d"
+		]
+	}
 	```
 - Click on **Overview** blade and copy the value for `Application (client) ID` in Essentials, save the value for later use. Open the linked Enterprise application in the `Managed application in local directory` in Essentials.
 
-	:::image type="content" source="./Images/Overview_EApp.jpg" alt-text="On App registration, Overview is highlighted.":::
+	![Overview](./Images/Overview_EApp.png)
 
 -  In the Enterprise Application, you can now assign the users and/or groups to the app-roles in the application.
 
-   	:::image type="content" source="./Images/UsersinEapp.jpg" alt-text="On Enterprise Application, Users and groups is highlighted.":::
+   	![Users and groups](./Images/UsersinEapp.png)
 
 ## ARM template to setup the Experimentation resources
 
