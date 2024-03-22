@@ -12,7 +12,7 @@ Split Experimentation for Azure App Configuration is a feature that allows devel
 •	Step 4: Create an application (Quickstart), make changes to application code <br />
 •	Step 5: Setup an Experiment on App Configuration Portal <br />
 •	Step 6: Getting Experiment results <br />
-•	Additional Read: Access Control, ARM Template ; QuickStart: Sample App ; Troubleshooting <br />
+•	Additional: Access Control, ARM Template ; QuickStart: Sample App ; Troubleshooting <br />
 
 ## Concept
 
@@ -46,9 +46,9 @@ When your experiment duration is nearing completion, it’s time to seek results
 
 ### Understanding your experimentation results
 Your experiment is only as good as the data your App Insights resource has collected. Once there is enough traffic to your application and subsequently more data from user interactions with events you have set up under the metrics mapping, you must determine which variant you intend to use as the control (baseline variant) and which one you intend to see changes in (comparison variant).  
-**Desired Outcome:** The desired outcome refers to the specific result or effect we hope to achieve through an experiment or intervention. It represents success according to our goals. 
-**Undesired Outcome:** An undesired outcome is the opposite of what we want to achieve. It represents failure or an unexpected result. 
-**Inconclusive:** An inconclusive result occurs when the data collected from an experiment does not provide clear evidence for either the desired or undesired outcome. 
+<br/>**Desired Outcome:** The desired outcome refers to the specific result or effect we hope to achieve through an experiment or intervention. It represents success according to our goals. 
+<br/>**Undesired Outcome:** An undesired outcome is the opposite of what we want to achieve. It represents failure or an unexpected result. 
+<br/>**Inconclusive:** An inconclusive result occurs when the data collected from an experiment does not provide clear evidence for either the desired or undesired outcome. 
 
 It means that we can not confidently conclude whether the intervention had a significant impact.
 Inconclusive results might arise due to insufficient sample size, noisy data, or other factors. 
@@ -61,7 +61,7 @@ To help introduce experimentation into your existing Azure resources, this new f
 
 ![Mapping Diagram](./Images/1.png)
 
-### Access Control 
+### Data Access Control 
 You use a Microsoft Entra Enterprise Application to manage the users and groups who can access the results of your experiment(s). If your group already uses an Enterprise Application, you may contact the administrator of your group to add you to the users of it. Otherwise, you can follow the instructions to create an Enterprise Application now or follow the instructions that will prompt you to create an Enterprise Application later. 
 
 ## Prerequisites 
@@ -185,13 +185,13 @@ The event allows you to measure how many users are clicking on that button as an
 **Name:** Enter a unique name for the new metric and a **Description** (optional)
 **Application Insights event name:** For the metric to be mapped to an Application Insights event specified in your application code.
 **Measure as:** Specify how to quantify this metric (e.g Count, Average, Sum, Percent)
-
-**Count:** Counts the number of times the event is triggered by your users.
-Average: Averages the value of the event for your users.
-**Sum:** Adds up the values of the event for your users. Shows the average summed value.
-**Percent:** Calculates the percentage of users that triggered the event.
-While the Quickstart uses Count as the measure, your application may have events with user actions that are too large to be measured as Count, for which you may opt for any of the above measurements instead. 
-**Desired Impact:** This allows results to be shown in context of positive and negative outcomes as it represents the ultimate goal or purpose behind measuring your created metric.
+<br/>
+**Count:** Counts the number of times the event is triggered by your users.<br/>
+**Average:** Averages the value of the event for your users.<br/>
+**Sum:** Adds up the values of the event for your users. Shows the average summed value.<br/>
+**Percent:** Calculates the percentage of users that triggered the event.<br/>
+While the Quickstart uses Count as the measure, your application may have events with user actions that are too large to be measured as Count, for which you may opt for any of the above measurements instead. <br/>
+**Desired Impact:** This allows results to be shown in context of positive and negative outcomes as it represents the ultimate goal or purpose behind measuring your created metric.<br/>
 
 Once you have created your metric, navigate to the Data Source blade and enable the **Data Ingestion checkbox** if it isn’t already enabled. Note: If you have not enabled **Data Ingestion** for your Split Experimentation Workspace resource already, feature evaluation and customer events will not be exported from your **Data Source** to Split.
 
@@ -226,8 +226,8 @@ If you navigate back to your **Feature Manager > Variant Feature Flag > edit** a
 ![Versioning](./Images/22.png)
  
 ## Additional: 
-Access Control
-ARM Template 
-QuickStart: Sample App 
-Troubleshooting
+[How to set up Data Access Control for Split Experimentation Workspace - authentication and authorization](how-to-setup-data-access-experimentation-app-config..md)
+<br/>ARM Template 
+<br/>QuickStart: Sample App - Quote of the Day
+<br/>Troubleshooting
 
