@@ -26,7 +26,7 @@ To help introduce experimentation into your existing Azure resources, this new f
 ![Mapping Diagram](./Images/1.png)
 
 ### Data Access Control 
-You use a Microsoft Entra Enterprise Application to manage the users and groups who can access the results of your experiment(s). If your group already uses an Enterprise Application, you may contact the administrator of your group to add you to the users of it. Otherwise, you can [follow the instructions to create an Enterprise Application now](how-to-setup-=data-access-experimentation.md) or follow the instructions below that will prompt you to create an Enterprise Application later. 
+You use a Microsoft Entra Enterprise Application to manage the users and groups who can access the results of your experiment(s). If your group already uses an Enterprise Application, you may contact the administrator of your group to add you to the users of it. Otherwise, you can [follow the instructions to create an Enterprise Application now](how-to-setup-data-access-experimentation-app-config.md) or follow the instructions below that will prompt you to create an Enterprise Application later. 
 
 ## Prerequisites 
 •	An Azure subscription. If you don’t have one, [create one for free](https://azure.microsoft.com/en-us/free/).<br />
@@ -171,7 +171,7 @@ The event allows you to measure how many users are clicking on that button as an
 
 **Desired Impact:** This allows results to be shown in context of positive and negative outcomes as it represents the ultimate goal or purpose behind measuring your created metric.<br/>
 
-*Note: the recommended way to reduce telemetry traffic, data costs, and storage costs, while preserving a statistically correct analysis of application data is a feature called Sampling in Application Insights. Sampling also helps you avoid Application Insights throttling your telemetry. By default, sampling is enabled and may impact the metric values in your experimentation results, but the results will still remain in the direction of the Desired Impact you specified during Metric creation. If you are using a small to medium application or simulating traffic, you may not need sampling and can turn it off in Application Insights. Learn more about [Sampling in Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/sampling-classic-api).*
+*Note: Application Insights sampling is enabled by default and it may impact your experimentation results. For this tutorial, you are recommended to turn off sampling in Application Insights as directed in the QuickStart application. Learn more about [Sampling in Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/sampling-classic-api).*
 
 You can now create Experimentation on your previously created Variant Feature Flag. Go to Feature Manager and edit the Variant Feature Flag by clicking on "...".
 
@@ -202,8 +202,8 @@ If you navigate back to your **Feature Manager > Variant Feature Flag > edit** a
 ![Versioning](./Images/22.png)
  
 ## Additional: 
-[How to set up Data Access Control for Split Experimentation Workspace - authentication and authorization](how-to-setup-data-access-experimentation-app-config..md)
-<br/>ARM Template 
-<br/>QuickStart: Sample App - Quote of the Day
-<br/>Troubleshooting
+- [How to set up Data Access Control for Split Experimentation Workspace - authentication and authorization](how-to-setup-data-access-experimentation-app-config.md) <br/>
+- ARM Template <br/>
+- QuickStart: Sample App - Quote of the Day <br/>
+- [Known Issues and Troubleshooting](known-issues-and-troubleshooting.md) <br/>
 
