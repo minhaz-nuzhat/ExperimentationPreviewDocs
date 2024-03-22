@@ -32,6 +32,8 @@ If the data is more than 10 minutes old, requesting results will cause a recalcu
 
 Please do not recreate a Split Experimentation Workspace with the same name even after you have already deleted the original resource as it will result in failure.
 
+---
+
 ## Troubleshooting
 
 ### Quickstart application (Quote of the Day) not showing data in experimentation results page
