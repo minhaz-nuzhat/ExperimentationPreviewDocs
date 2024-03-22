@@ -1,0 +1,234 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "RGname":{
+            "type": "string"
+        },
+        "LAWname": {
+            "type": "string"
+        },
+        "location": {
+            "type": "string"
+        },
+        "LAWsku": {
+            "type": "string"
+        },
+        "SAname": {
+            "type": "string"
+        },
+         "SAkind": {
+            "type": "string"
+        },
+         "SAskuname": {
+            "type": "string"
+        },
+        "SAskutier": {
+            "type": "string"
+        },
+        "storageAccountRuleName": {
+            "defaultValue": "storage-account-rule-name",
+            "type": "string"
+        },
+         "AIname":  {
+            "type": "String"
+        },
+        "AItype": {
+            "type": "String"
+        },
+        "AIrequestSource": {
+            "type": "String"
+        },
+        "UniqueName": {
+            "defaultValue": "[tolower(uniqueString(resourceGroup().id))]",
+            "type": "string"
+        },
+        "SEWname": {
+            "type": "string"
+        },
+        "SEWsku": {
+            "type": "string"
+        },
+        "SEWdataSourceEnabled": {
+            "type": "bool"
+        },
+        "SEWEntraApplicationId": {
+            "type": "string"
+        },
+        "AACname": {
+            "type": "String"
+        },
+        "AACsku": {
+            "type": "String"
+        },
+        "AACsoftDeleteRetentionInDays": {
+            "type": "Int"
+        },
+        "AACenablePurgeProtection": {
+            "type": "Bool"
+        },
+        "AACdisableLocalAuth": {
+            "type": "Bool"
+        },
+        "DPendpoint":{
+            "defaultValue": "https://asi.us.az.split.io/v1/experimentation-workspaces/",
+            "type": "string"
+        }
+
+            
+    },
+
+    "variables": {
+        "storageAccountResourceId": "[resourceId('microsoft.Storage/storageAccounts', substring(concat(parameters('SAname'), parameters('UniqueName')), 0, 20))]",
+        "loganalyticsworkspaceResourceId": "[resourceId('microsoft.operationalinsights/workspaces', concat (parameters('LAWname'), parameters('UniqueName')))]",
+        "splitWorkspaceResourceId": "[resourceId('SplitIO.Experimentation/experimentationWorkspaces', concat (parameters('SEWname'), parameters('UniqueName')))]",
+        "appInsightsResourceId": "[resourceId('microsoft.insights/components', concat (parameters('AIname'), parameters('UniqueName')))]",
+        "workspaceId":"[concat('/subscriptions/', subscription().subscriptionId, '/resourcegroups/',parameters('RGname'),'/providers/microsoft.operationalinsights/workspaces/', parameters('LAWname'), parameters('UniqueName')) ]",                 
+        "storageId":"[concat('/subscriptions/', subscription().subscriptionId, '/resourcegroups/',parameters('RGname'),'/providers/Microsoft.Storage/storageAccounts/', substring(concat(parameters('SAname'), parameters('UniqueName')), 0, 20)) ]",
+        "appInsightsId":"[concat('/subscriptions/', subscription().subscriptionId, '/resourcegroups/',parameters('RGname'),'/providers/Microsoft.insights/components/', parameters('AIname'), parameters('UniqueName')) ]",       
+        "splitworkspaceid":"[concat('/subscriptions/', subscription().subscriptionId, '/resourcegroups/',parameters('RGname'),'/providers/SplitIO.Experimentation/experimentationWorkspaces/', parameters('SEWname'), parameters('UniqueName')) ]",
+        "storageBlobReaderRole": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Authorization/roleDefinitions/', '2a2b9908-6ea1-4ae2-8e65-a410df84e7d1')]",
+        "dataplaneEndpoint":"[concat(parameters('DPendpoint'),parameters('SEWname'), parameters('UniqueName'))]"
+        
+    },
+
+    "resources": [
+
+    {
+      
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2019-06-01",
+      "name": "[substring(concat(parameters('SAname'), parameters('UniqueName')), 0, 20)]",
+      "location": "[parameters('location')]",
+      "kind": "[parameters('SAkind')]",
+      "sku": {
+        "name": "[parameters('SAskuname')]",
+        "tier": "[parameters('SAskutier')]"
+      }
+    },
+
+
+    {
+        "type": "Microsoft.OperationalInsights/workspaces",
+        "apiVersion": "2017-03-15-preview",
+        "name":  "[concat (parameters('LAWname'), parameters('UniqueName'))]",
+        "location": "[parameters('location')]",
+        "properties": {
+            "sku": {
+                "name": "[parameters('LAWsku')]"
+                }
+            },
+
+        "resources": [
+            {
+                "type": "microsoft.operationalinsights/workspaces/dataexports",
+                "apiVersion": "2020-08-01",
+                "name": "[concat(parameters('LAWname'), parameters('UniqueName'),'/' , parameters('storageAccountRuleName'))]",
+                "dependsOn": [
+                    "[variables('loganalyticsworkspaceResourceId')]",
+                    "[variables('storageAccountResourceId')]"
+                     ],
+                "properties": {
+                    "destination": {
+                     "resourceId": "[variables('storageId')]"
+                    },
+                    "tableNames": [
+                        "AppEvents"
+                    ],
+                    "enable": true
+                }
+            }
+        ]
+        
+    },
+
+    {
+        "type": "microsoft.insights/components",
+        "apiVersion": "2020-02-02-preview",
+        "name":  "[concat (parameters('AIname'), parameters('UniqueName'))]",
+        "location": "[parameters('location')]",
+        "kind": "other",
+            "dependsOn": [
+            "[variables('loganalyticsworkspaceResourceId')]"
+            ],
+        "properties": {
+            "Application_Type": "[parameters('AItype')]",
+            "Flow_Type": "Bluefield",
+            "Request_Source": "[parameters('AIrequestSource')]",
+            "WorkspaceResourceId": "[variables('workspaceId')]"
+        }
+            
+    },
+
+     {
+        "type": "SplitIO.Experimentation/experimentationWorkspaces",
+        "apiVersion": "2024-03-01-preview",
+        "name":  "[concat (parameters('SEWname'), parameters('UniqueName'))]",
+        "location": "[parameters('location')]",
+        "identity": {
+            "type": "SystemAssigned"
+        },
+        "sku": {
+            "name": "[parameters('SEWsku')]"
+        },
+        "dependsOn": [ "[variables('appInsightsResourceId')]", 
+                        "[variables('storageAccountResourceId')]"
+                    ],
+        "properties": {
+            "accessPolicy": {
+                "applicationId": "[parameters('SEWEntraApplicationId')]"
+            },
+            "dataSource": {
+                "logAnalytics": {
+                    "resourceId": "[variables('workspaceId')]",
+                    "storageAccountResourceId": "[variables('storageId')]",
+                    "enabled": "[parameters('SEWdataSourceEnabled')]"
+                }
+            }
+        }
+    },
+
+        {
+        "type": "Microsoft.Authorization/roleAssignments",
+        "apiVersion": "2022-04-01",
+        "name": "[guid(variables('splitWorkspaceResourceId'), variables('storageBlobReaderRole'))]",
+        "properties": {
+            "roleDefinitionId": "[variables('storageBlobReaderRole')]",
+            "principalId": "[reference(variables('splitWorkspaceResourceId'), '2024-03-01-preview', 'Full').identity.principalId]",
+            "principalType": "ServicePrincipal"
+        },
+        "scope": "[variables('storageId')]"
+    },
+
+    {
+        "type": "Microsoft.AppConfiguration/configurationStores",
+        "apiVersion": "2023-09-01-preview",
+        "name":  "[concat (parameters('AACname'), parameters('UniqueName'))]",
+        "location": "[parameters('location')]",
+        "dependsOn": [ "[variables('appInsightsResourceId')]",
+                    "[variables('splitWorkspaceResourceId')]"
+                     ],
+        "sku": {
+            "name": "[parameters('AACsku')]"
+            },
+        "properties": {
+            "softDeleteRetentionInDays": "[parameters('AACsoftDeleteRetentionInDays')]",
+            "enablePurgeProtection": "[parameters('AACenablePurgeProtection')]",
+            "disableLocalAuth": "[parameters('AACdisableLocalAuth')]",
+            "telemetry": {
+            "resourceId": "[variables('appInsightsId')]"
+            },
+        "experimentation": {
+            "resourceId": "[variables('splitworkspaceid')]",
+            "dataPlaneEndpoint": "[variables('dataplaneEndpoint')]"
+            }
+        }   
+    }
+
+    
+ 
+           
+
+
+    ]
+}

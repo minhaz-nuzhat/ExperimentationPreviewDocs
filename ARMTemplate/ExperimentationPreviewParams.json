@@ -1,0 +1,71 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "RGname":{
+            "value":""
+        },
+        "LAWname": {
+            "value": "lawpreview"
+        },
+        "location": {
+            "value": "eastus"
+        },
+        "LAWsku": {
+            "value": "pergb2018"
+        },
+        "SAname": {
+            "value": "sapreview"
+        },
+        "SAkind": {
+            "value": "StorageV2"
+        },
+        "SAskuname": {
+            "value": "Standard_LRS"
+        },
+        "SAskutier": {
+            "value": "Standard"
+        },        
+        "AIname": {
+            "value": "aipreview"
+        },
+        "AItype": {
+            "value": "web"
+        },
+        "AIrequestSource": {
+            "value": "Custom Deployment"
+        },
+        "SEWname": {
+            "value": "sewpreview"
+        },
+        "SEWsku": {
+            "value": "azure_experimentation_payg%%Monthly"
+        },
+        "SEWdataSourceEnabled": {
+            "value": true
+        },
+        "SEWEntraApplicationId": {
+            "value": ""
+        },
+        "AACname": {
+            "value": "aacpreview"
+        },        
+        "AACsku": {
+            "value": "standard"
+        },
+        "AACsoftDeleteRetentionInDays": {
+            "value": 7
+        },
+        "AACenablePurgeProtection": {
+            "value": false
+        },
+        "AACdisableLocalAuth": {
+            "value": false
+        }
+       
+       
+    }
+}
+
+
+
