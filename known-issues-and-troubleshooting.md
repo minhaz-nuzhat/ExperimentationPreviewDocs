@@ -40,13 +40,17 @@ Solution(s):
 1. Go to **App Configuration > Feature Manager**. In the 3 dot dropdown **"..."** for your variant feature flag: <br/>
 a. Select History. Take note of the timestamp and etag of the newest version. <br/>
 b. Select Experiment. The "Version" timestamp should match the timestamp seen in step 1.a. <br/>
+
 2. Go to **App Insights > Logs**. Run the query "customEvents" and sort by timestamp. <br/>
 a. You should see Events with name: FeatureEvaluation <br/>
       &nbsp;&nbsp;&nbsp;&nbsp; i. Ensure the customDimension.eTag matches the eTag in step 1. <br/>
       &nbsp;&nbsp;&nbsp;&nbsp; ii. Ensure the customDimension.TargetingId has a value. <br/>
 b. You should see Events with different name. These are the events you can build metrics from. Take note of the "Name".*(This string was defined by your code in the "TrackEvent" call to App Insights)* <br/>
+
 3. Go to **Split Experimentation Workspace > Experimentation Workspace** and click **Edit** on your Metric <br/>
 a. Ensure the Application Insights Event Name exactly matches the "Name" seen in App Insights in step 2.b. <br/>
+
 4. Watch the network traffic of the Experiment results page and check the response of the metric-results call. You should see SampleSizeRecieved. <br/>
 a. If SampleSizeRecieved is more than 0, your Split Experimentation Workspace is receiving events but the mapping of the resources on Azure to create your experiment may not have been correctly setup. <br/>
-b. If SampleSizeRecieved equal to 0, your Split Experimentation Workspace is not seeing any of the data. This can be due missing data in your Storage Account implying an incorrect export rule, or incorrect permissions setup between your Split Experimentation Workspace and your Storage Account. 
+b. If SampleSizeRecieved equal to 0, your Split Experimentation Workspace is not seeing any of the data. This can be due missing data in your Storage Account implying an incorrect export rule, or incorrect permissions setup between your Split Experimentation Workspace and your Storage Account.
+Navigate to your Split Experimentation Workspace resource to review details of the linked Storage Account under "Data Source".
