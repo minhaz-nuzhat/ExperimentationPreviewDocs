@@ -45,10 +45,11 @@ Once you have added your Application Insights resource to the App Configuration 
 ![SEW Create](./Images/3.png)
 
 ### Basics
-**Subscription:** Select the Azure subscription that you want to use for the resource.
-**Resource group:** Select an existing resource group or create a new one for the resource.
-**Resource name:** Enter a unique name for the resource.
-**Region:** Select the region where you want to deploy the resource.
+
+**Subscription:** Select the Azure subscription that you want to use for the resource.<br/>
+**Resource group:** Select an existing resource group or create a new one for the resource.<br/>
+**Resource name:** Enter a unique name for the resource.<br/>
+**Region:** Select the region where you want to deploy the resource.<br/>
 **Pricing plan:** Currently only one pricing plan is supported (Pay As You Go).
 
 Select “Next”.
@@ -57,6 +58,9 @@ Select “Next”.
 
 ### Configure the Data Source
 Enable Data Ingestion by selecting the checkbox to allow ingestion of impressions and events from the data source. If you deselect the checkbox, you can enable data ingestion later using the App Configuration portal by navigating to **Experimentation > Split Experimentation Workspace.**
+
+*Note: If you do not enable **Data Ingestion** for your Split Experimentation Workspace resource, feature evaluation and customer events will not be exported from your **Data Source** to Split.* <br/>
+
 Under Log Analytics workspace, select the Application Insights resource you want to use for this experiment (note: this has to be the same Application Insights Workspace that you connected to your App Configuration store in the previous step). 
 
 Under **Export Destination Details**, select the Storage Account you want to use for storing impressions and events data. If you don’t have a Storage Account already, create one for free. A data export rule will be created in the selected Log Analytics workspace to export data to the storage account entered and configured below (note: when creating new Storage Account for Experimentation, you are required to use the same region as your Log Analytics Workspace).
@@ -132,8 +136,6 @@ If you do not have a .NET application to run an experiment on already, use this 
 
 If you already have a .NET application, the steps outlined in the QuickStart describe the changes you have to make to your existing code.
 
-Note: the recommended way to reduce telemetry traffic, data costs, and storage costs, while preserving a statistically correct analysis of application data is a feature called Sampling in Application Insights. Sampling also helps you avoid Application Insights throttling your telemetry. By default, sampling is enabled which may impact your experimentation results. If you are using a small to medium application or simulating traffic, you may not need sampling. Learn more about [Sampling in Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/sampling-classic-api).
-
 ## Step 5: Setup an Experiment on App Configuration 
 
 ### Creating Metrics for your experiment
@@ -169,17 +171,13 @@ The event allows you to measure how many users are clicking on that button as an
 
 **Desired Impact:** This allows results to be shown in context of positive and negative outcomes as it represents the ultimate goal or purpose behind measuring your created metric.<br/>
 
-Once you have created your metric, navigate to the Data Source blade and enable the **Data Ingestion checkbox** if it isn’t already enabled. Note: If you have not enabled **Data Ingestion** for your Split Experimentation Workspace resource already, feature evaluation and customer events will not be exported from your **Data Source** to Split.
+*Note: the recommended way to reduce telemetry traffic, data costs, and storage costs, while preserving a statistically correct analysis of application data is a feature called Sampling in Application Insights. Sampling also helps you avoid Application Insights throttling your telemetry. By default, sampling is enabled and may impact the metric values in your experimentation results, but the results will still remain in the direction of the Desired Impact you specified during Metric creation. If you are using a small to medium application or simulating traffic, you may not need sampling and can turn it off in Application Insights. Learn more about [Sampling in Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/sampling-classic-api).*
 
-Once the metrics have been created, return to the App Configuration portal and under **Experimentation > Split Experimentation Workspace**, confirm that your App Configuration store is connected to your Split Experimentation Workspace properly. If not, you can click Edit to update it.
-
-![AppConfig Connected](./Images/18.png)
-
-Once your App Configuration is connected to the Split Experimentation Workspace, go to Feature Manager and under “edit”, you can now create Experimentation on your previously created Variant Feature Flag.
+You can now create Experimentation on your previously created Variant Feature Flag. Go to Feature Manager and edit the Variant Feature Flag by clicking on "...".
 
 ![Create Experiment](./Images/19.png)
  
-You will now be able to Create Experiment under the Experiment tab by checking the box and will be prompted to add a name and description for your experiment on this variant feature flag. 
+Create Experiment under the Experiment tab by checking the box and you will be prompted to add a name and description for your experiment on this variant feature flag. 
 
 ![Create Experiment Checkbox](./Images/20.png)
  
