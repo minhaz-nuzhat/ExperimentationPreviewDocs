@@ -1,4 +1,4 @@
-# How to set up Data Plane Access Control for Split Experimentation Workspace on Azure App Config - authentication and authorization
+# How to set up Data Access Control for Split Experimentation Workspace - authentication and authorization
 
 Experimentation in Azure App Configuration uses Microsoft Entra to authorize requests for Split Experimentation Workspace resources. Microsoft Entra also enables the use of custom roles to grant permissions to security principals.
 
