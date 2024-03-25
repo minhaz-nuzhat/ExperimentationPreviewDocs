@@ -1,39 +1,40 @@
-# QuoteOfTheDayQuickStart
+# QuickStart - Quote of the Day app for experimentation on Azure App Configuration
 
-### Prerequisites
+This QuickStart will allow you to create a basic application that shows how two categories of users view different messages alongside a quote of the day. 
 
-This quick start assumes you have completed a previous step in order to create the following required resources:
+## Prerequisites
+- An Azure subscription. If you don’t have one, [create one for free](https://azure.microsoft.com/en-us/free/).<br />
+- An App Configuration store. If you don’t have one, [create an App Configuration store](https://learn.microsoft.com/en-us/azure/azure-app-configuration/use-feature-flags-dotnet-core).<br />
+    - A variant feature flag named "Greeting" inside the App Configuration instance
+    - One variant named 'On' with value 'true'
+    - One variant named 'Off' with value 'false'
+    - Allocation between 'On' and 'Off' set to 50% / 50%
+- An App Insights resource. If you don’t have one, [create an App Insights resource](https://learn.microsoft.com/en-us/azure/azure-monitor/app/create-workspace-resource?tabs=bicep).<br />
 
-* An instance of Azure App Configuration
-* An instance of Azure Application Insights
-* A variant feature flag named "Greeting" inside the App Configuration instance
-  * One variant named 'On' with value 'true'
-  * One variant named 'Off' with value 'false'
-  * Allocation between 'On' and 'Off' set to 50% / 50%
 
-### Steps
+## Steps
 
-1.
-
-In cmd run
+1. In cmd run
 
 `dotnet new razor --auth Individual -o QuoteOfTheDay`
 
-2. 
+This creates a new Razor Pages application in ASP.NET Core, using Individual account auth, and placing it in an output folder named "QuoteOfTheDay" 
 
-In cmd, navigate to the `QuoteOfTheDay` folder and run
+2. In cmd, navigate to the `QuoteOfTheDay` folder and run
 
 `dotnet user-secrets set ConnectionStrings:AppConfiguration "<App Configuration Connection string>"`
 
-3.
+This creates a user secret (See [Secrets Management](https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-8.0&tabs=windows)) for the application. This secret holds the connection string for App Configuration.
 
-Next, run
+3. Next, run:
 
 `dotnet user-secrets set ConnectionStrings:AppInsights "<App Insights Connection string>"`
 
-4.
+This creates another user secret that holds the connection string for App Insights.
 
-In QuoteOfTheDay.csproj add
+---
+
+4. In QuoteOfTheDay.csproj add
 
 ```
 <PackageReference Include="Microsoft.Azure.AppConfiguration.AspNetCore" Version="8.0.0-preview.2" />
@@ -42,9 +43,11 @@ In QuoteOfTheDay.csproj add
 <PackageReference Include="Microsoft.FeatureManagement.AspNetCore" Version="4.0.0-preview2" />
 ```
 
-5.
+This adds the latest preview versions of the Feature Management and App Configuration SDKs as required packages.
 
-In `Program.cs` under the line `var builder = WebApplication.CreateBuilder(args);` add
+---
+
+5. In `Program.cs` under the line `var builder = WebApplication.CreateBuilder(args);` add
 
 ```
 builder.Configuration
@@ -56,9 +59,11 @@ builder.Configuration
     });
 ```
 
-6.
+This adds the App Configuration provider, which will pull down the configuration from Azure when the application starts. By default, the UseFeatureFlags method includes all Feature Flags with no label and sets a cache expiration time of 30 seconds.
 
-In `Program.cs` add the following using statements:
+---
+
+6. In `Program.cs` add the following using statements:
 
 ```
 using Microsoft.ApplicationInsights.AspNetCore.Extensions;
@@ -76,6 +81,10 @@ Under where `builder.Configuration.AddAzureAppConfiguration` is called, add:
             })
             .AddSingleton<ITelemetryInitializer, TargetingTelemetryInitializer>();
 ```
+
+This adds Application Insights Telemetry Client to the application. It also includes a singleton TargetingTelemetryInitializer which appends Targeting information to each outgoing telemetry event
+
+---
 
 7. In the root folder (QuoteOfTheDay) create a new file named `ExampleTargetingContextAccessor.cs`. This will create a new class named `ExampleTargetingContextAccessor`. Paste the content below into the file.
 
@@ -118,7 +127,11 @@ namespace QuoteOfTheDay
 }
 ```
 
-8. Naviagte back to Program.cs and add the following using statements.
+This class declares how FeatureManagement's targeting gets the context for a user. In this case, it reads httpContext.User.Identity.Name for the UserId and treats the domain of the email address as a Group.
+
+---
+
+8. Navigate back to Program.cs and add the following using statements.
 
 ```
 using Microsoft.FeatureManagement.Telemetry.ApplicationInsights;
@@ -138,12 +151,20 @@ builder.Services.AddAzureAppConfiguration()
     .AddTelemetryPublisher<ApplicationInsightsTelemetryPublisher>();
 ```
 
+This adds services to handle App Configuartion Refresh, setup Feature Management, configure Feature Management Targeting, and enable Feature Management to publish telemetry events. 
+
+---
+
 9. Under the line `var app = builder.Build();` add
 
 ```
 // Use Azure App Configuration middleware for dynamic configuration refresh.
 app.UseAzureAppConfiguration();
 ```
+
+This adds a middleware that triggers App Configuration refresh when appropriate
+
+---
 
 10. Under that add
 
@@ -152,11 +173,19 @@ app.UseAzureAppConfiguration();
 app.UseMiddleware<TargetingHttpContextMiddleware>();
 ```
 
+This enables the TargetingTelemetryInitializer to have access to Targeting information by storing it on HttpContext.
+
+---
+
 11. In QuoteOfTheDay > Pages > Shared > _Layout.cshtml under where 'QuoteOfTheDay.styles.css' is added, add the following line
 
 ```
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 ```
+
+This adds the css for version 5.15.3 of font-awesome
+
+---
 
 12. Open QuoteOfTheDay > Pages > Index.cshtml.cs and overwrite the content to the quote app
 
@@ -218,6 +247,10 @@ public class IndexModel(IVariantFeatureManagerSnapshot featureManager, Telemetry
     }
 }
 ```
+
+This PageModel picks a random quote, uses `GetVariantAsync` to get the variant for the current user, and sets a varaible called "ShowGreeting" to the variant's value. The PageModel also handles Post requests, calling `_telemetryClient.TrackEvent("Like");`, which will send an event to app insights with the name "Like". This event is automatically tied to the user and variant, and can be tracked by metrics. 
+
+---
 
 13. Open index.cshtml and overwrite the content for the quote app
 
@@ -331,6 +364,10 @@ public class IndexModel(IVariantFeatureManagerSnapshot featureManager, Telemetry
 </script>
 ```
 
+This is the UI to show the QuoteOfTheDay and handle "Heart-ing" a quote. It uses the previously mentioned `Model.ShowGreeting` value to show different things to different users, depending on their variant.
+
+---
+
 14. In cmd, in the QuoteOfTheDay folder, run: `dotnet build`
 15. Run: `dotnet run --launch-profile https`
 16. Look for a message in the format `Now listening on: https://localhost:{port}` in the output of the application. Navigate to the included link in your browser.
@@ -361,7 +398,9 @@ Make two users: "user@contoso.com" (off) & "userb@contoso.com" (on)
 
 If you create a new user named user@contoso.com, the user will not see the special message.
 
-### Completed reference
+---
+
+## Completed Reference
 
 A completed version of this quick start is available at https://github.com/jimmyca15/QuoteOfTheDayQuickStart-Completed.
 
@@ -369,6 +408,10 @@ A completed version of this quick start is available at https://github.com/jimmy
 
 At this point you have completed the quick start. The following additional topics may be of interest.
 
-### Traffic simulation
+### Traffic Simulation
 
 A simulator is available at https://github.com/jimmyca15/QuoteOfTheDaySimulator. This simulator can be used to simulate traffic to the quote of the day application to help enable telemetry and experimentation analysis.
+
+### Sampling
+
+Application Insights sampling is enabled by default and it may impact your experimentation results. For this tutorial, you are recommended to turn off sampling in Application Insights as directed in the QuickStart application. Learn more about [Sampling in Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/sampling-classic-api).
