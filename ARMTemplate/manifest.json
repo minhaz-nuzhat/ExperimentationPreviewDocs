@@ -1,0 +1,102 @@
+{
+	"id": "",
+	"acceptMappedClaims": null,
+	"accessTokenAcceptedVersion": null,
+	"addIns": [],
+	"allowPublicClient": null,
+	"appId": "",
+	"appRoles": [
+		{
+			"allowedMemberTypes": [
+				"User",
+				"Application"
+			],
+			"description": "Read only",
+			"displayName": "ExperimentationDataReader",
+			"id": "183aa424-49e9-4e00-8553-78635e44cd07",
+			"isEnabled": true,
+			"lang": null,
+			"origin": "Application",
+			"value": "ExperimentationDataReader"
+		},
+		{
+			"allowedMemberTypes": [
+				"User",
+				"Application"
+			],
+			"description": "read write permissions",
+			"displayName": "ExperimentationDataOwner",
+			"id": "faaf6f06-f88b-45e2-907d-26798d3ae574",
+			"isEnabled": true,
+			"lang": null,
+			"origin": "Application",
+			"value": "ExperimentationDataOwner"
+		}
+	],
+	"oauth2AllowUrlPathMatching": false,
+	"createdDateTime": "2024-03-06T16:33:24Z",
+	"description": null,
+	"certification": null,
+	"disabledByMicrosoftStatus": null,
+	"groupMembershipClaims": null,
+	"identifierUris": [
+		"api://"
+	],
+	"informationalUrls": {
+		"termsOfService": null,
+		"support": null,
+		"privacy": null,
+		"marketing": null
+	},
+	"keyCredentials": [],
+	"knownClientApplications": [],
+	"logoUrl": null,
+	"logoutUrl": null,
+	"name": "",
+	"notes": null,
+	"oauth2AllowIdTokenImplicitFlow": false,
+	"oauth2AllowImplicitFlow": false,
+	"oauth2Permissions": [
+		{
+			"adminConsentDescription": "Allows the request access token for SplitExperimentationWorkspace",
+			"adminConsentDisplayName": "SplitExperimenattionWorkspace",
+			"id": "b77a34fd-bafc-45e0-8907-a6098d55c56d",
+			"isEnabled": true,
+			"lang": null,
+			"origin": "Application",
+			"type": "User",
+			"userConsentDescription": "Allows the request access token for SplitExperimentationWorkspace",
+			"userConsentDisplayName": "SplitExperimentationWorkspace",
+			"value": "SplitExperimentationWorkspace"
+		}
+	],
+	"oauth2RequirePostResponse": false,
+	"optionalClaims": null,
+	"orgRestrictions": [],
+	"parentalControlSettings": {
+		"countriesBlockedForMinors": [],
+		"legalAgeGroupRule": "Allow"
+	},
+	"passwordCredentials": [],
+	"preAuthorizedApplications": [
+		
+	],
+	"publisherDomain": "microsoft.onmicrosoft.com",
+	"replyUrlsWithType": [],
+	"requiredResourceAccess": [
+		{
+			"resourceAppId": "00000003-0000-0000-c000-000000000000",
+			"resourceAccess": [
+				{
+					"id": "e1fe6dd8-ba31-4d61-89e7-88639da4683d",
+					"type": "Scope"
+				}
+			]
+		}
+	],
+	"samlMetadataUrl": null,
+	"signInUrl": null,
+	"signInAudience": "AzureADMyOrg",
+	"tags": [],
+	"tokenEncryptionKeyId": null
+}
