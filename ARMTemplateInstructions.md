@@ -11,7 +11,7 @@ ms.custom: template-how-to
 
 # Use ARM template for Experimentation resources
 
-This article will help you set up the Experimentation pipeline depicted in Figure (). You will be using Azure ClI and ARM template for majority of the setup.
+This article will help you set up the Experimentation pipeline depicted in this [Figure](./how-to-setup-experimentation.md#how-does-experimentation-work-in-azure-app-configuration). You will be using Azure CLI and ARM template for the Azure resources setup, and then use the Azure portal flow to create Feature flags and experiments.
 
 ## Prerequisites
 
@@ -23,7 +23,7 @@ This article will help you set up the Experimentation pipeline depicted in Figur
 
 ## Enterprise app for Data access policy
 
-First step is to create and configure the Entra ID's Enterprise App setup. This Entra ID app is used for accessing the Data plane of the Split SaaS from App Configuration and Split Experimentation Workspace.
+First step is to create and configure the Entra ID's Enterprise App setup. This Entra ID app is used for accessing the Data plane of the Split SaaS from App Configuration and Split Experimentation Workspace. ARM template for experimentation requires the App ID generated in this step.
 
 - To create the Enterprise app registration for data access from Split
   
