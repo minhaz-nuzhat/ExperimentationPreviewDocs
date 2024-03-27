@@ -4,13 +4,13 @@ Split Experimentation for Azure App Configuration allows developers to easily te
 
 ## Experimentation in Azure App Configuration
  
-To help introduce experimentation into your existing Azure resources, this new feature is an integrated offering by Split built on top of App Config and App Insights. As you go through this tutorial for setting up your first experiment, the key steps include setting up your App Config store including Variant Feature Flags, connecting your application to App Insights for definition of event data and metric mapping to be used for your experiment, and creating a Split Experimentation Workspace resource that will generate results powered by the Split SaaS on Azure.
+To help introduce [experimentation](https://github.com/Muksvso/ExperimentationPreviewDocs?tab=readme-ov-file#what-is-experimentation) into your existing Azure resources, this new feature is an integrated offering by Split built on top of App Config and App Insights. As you go through this tutorial for setting up your first experiment, the key steps include setting up your App Config store including Variant Feature Flags, connecting your application to App Insights for definition of event data and metric mapping to be used for your experiment, and creating a Split Experimentation Workspace resource that will generate results powered by the Split SaaS on Azure.
 
 ![Mapping Diagram](./Images/1.png)
 
 ### Getting Started
 
-To use the Azure Portal to set up your first experiment, refer to the document [how to set up experimentation in Azure App Configuration](/how-to-setup-experimentation.md) which will allow you to create an experiment, setup metrics for results, create a QuickStart application to run the experiment on, and setup data access policies. To use CLI or ARM Template instead, refer to the document "ARM Template Instructions".
+To use the Azure Portal to set up your first experiment, refer to the document [how to set up experimentation in Azure App Configuration](/how-to-setup-experimentation.md) which will allow you to create an experiment, setup metrics for results, create a QuickStart application to run the experiment on, and setup data access policies. To use CLI or ARM Template instead, refer to the document [ARM Template Instructions](/ARMTemplateInstructions.md).
 
 ---
 
